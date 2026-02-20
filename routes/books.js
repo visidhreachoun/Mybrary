@@ -4,7 +4,7 @@ const router = express.Router();
 const Book = require("../models/books");
 const Author = require("../models/authors");
 const { error } = require("console");
-const uploadPath = path.join("public", Book.coverImageBasePath);
+
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 
 // All Book Route
@@ -52,11 +52,7 @@ router.post("/", async (req, res) => {
     renderNewPage(res, book, true);
   }
 });
-function removeBookCover(fileName) {
-  fs.unlink(path.join(uploadPath, fileName), (err) => {
-    console.err(error);
-  });
-}
+
 async function renderNewPage(res, book, hasError = false) {
   try {
     const authors = await Author.find({});
